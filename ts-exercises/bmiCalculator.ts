@@ -29,36 +29,36 @@ const parseBmiArguments = (args: Array<string>): BmiValues => {
 
 
 export const calculateBmi = (height: number, weight: number): BmiResult | ErrorMessage => {
-  let heightToMeters = height/100;
-  let bmiIndex = (weight)/(heightToMeters*heightToMeters);
+  const heightToMeters = height/100;
+  const bmiIndex = (weight)/(heightToMeters*heightToMeters);
   let message = '';
 
   if (isNaN(heightToMeters) || isNaN(bmiIndex)) {
-    return {error: "Malformatted parameters"}
+    return {error: "Malformatted parameters"};
   }
   if (bmiIndex >= 18.5 && bmiIndex <=25) {
-    message = 'Normal'
+    message = 'Normal';
   }
   if (bmiIndex > 25 && bmiIndex <= 30) {
-    message = 'Overweight'
+    message = 'Overweight';
   }
   if (bmiIndex > 30 && bmiIndex <= 40) {
-    message = 'Obesity'
+    message = 'Obesity';
   }
   if (bmiIndex >= 40) {
-    message = 'Morbid obesity'
+    message = 'Morbid obesity';
   }
   if (bmiIndex < 18.5) {
-    message = 'Something is not right'
+    message = 'Something is not right';
   }
   return {weight: weight, height: height, bmi: message};
-}
+};
 
 try {
   const { height, weight } = parseBmiArguments(process.argv);
-  console.log(calculateBmi(height, weight))
+  console.log(calculateBmi(height, weight));
 } catch (error: unknown) {
-  let errorMessage = 'Something bad happened.'
+  let errorMessage = 'Something bad happened.';
   if(error instanceof Error) {
     errorMessage += ' Error: ' + error.message;
   }
