@@ -1,11 +1,12 @@
-import { NewPatientEntry } from "./types";
+import { NewPatientEntry, Entry } from "./types";
 
 type Fields = { 
   name : unknown, 
   dateOfBirth: unknown, 
   ssn: unknown, 
   gender: unknown, 
-  occupation: unknown 
+  occupation: unknown,
+  entries: Array<Entry> | []
 };
 
 export enum Gender {
@@ -66,13 +67,14 @@ const parseOccupation = (occupation: unknown): string => {
   return occupation;
 };
 
-const toNewPatientEntry = ({ name, dateOfBirth, ssn, gender, occupation } : Fields): NewPatientEntry => {
+const toNewPatientEntry = ({ name, dateOfBirth, ssn, gender, occupation, entries } : Fields): NewPatientEntry => {
   const newEntry: NewPatientEntry = {
     name: parseName(name),
     dateOfBirth: parseDate(dateOfBirth),
     ssn: parseSsn(ssn),
     gender: parseGender(gender),
-    occupation: parseOccupation(occupation)
+    occupation: parseOccupation(occupation),
+    entries: entries
   };
 
   return newEntry;

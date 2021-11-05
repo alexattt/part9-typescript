@@ -3,6 +3,16 @@ import patientService from '../services/patientService';
 import toNewPatientEntry from '../utils';
 const router = express.Router();
 
+router.get('/:id', (_req, res) => {
+  const patient = patientService.findById(_req.params.id);
+
+  if (patient) {
+    res.send(patient);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
 router.get('/', (_req, res) => {
   res.send(patientService.getNonSensitiveInformation());
 });
