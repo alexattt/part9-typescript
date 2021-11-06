@@ -13,6 +13,21 @@ router.get('/:id', (_req, res) => {
   }
 });
 
+router.post('/:id/entries', (_req, res) => {
+  try {
+    const newHealthcheckEntry = _req.body;
+    const addedHealthcheckEntry = patientService.addPatientEntry(newHealthcheckEntry, _req.params.id);
+    console.log(addedHealthcheckEntry);
+    res.json(addedHealthcheckEntry);
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong.'
+    if(error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    res.status(400).send(errorMessage);
+  }
+})
+
 router.get('/', (_req, res) => {
   res.send(patientService.getNonSensitiveInformation());
 });

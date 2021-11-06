@@ -15,6 +15,13 @@ export enum Gender {
   Female = 'Female'
 };
 
+export enum HealthCheckRating {
+  "Healthy" = 0,
+  "LowRisk" = 1,
+  "HighRisk" = 2,
+  "CriticalRisk" = 3
+}
+
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
@@ -32,11 +39,11 @@ const parseName = (name: unknown): string => {
   return name;
 };
 
-const parseDate = (dateOfBirth: unknown): string => {
-  if (!dateOfBirth || !isString(dateOfBirth) || !isDate(dateOfBirth)) {
-      throw new Error('Incorrect or missing date: ' + dateOfBirth);
+const parseDate = (date: unknown): string => {
+  if (!date || !isString(date) || !isDate(date)) {
+      throw new Error('Incorrect or missing date: ' + date);
   }
-  return dateOfBirth;
+  return date;
 };
 
 const parseSsn = (ssn: unknown): string => {
